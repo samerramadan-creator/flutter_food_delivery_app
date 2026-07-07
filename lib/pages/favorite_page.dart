@@ -23,7 +23,7 @@ class _FavoritePageState extends State<FavoritePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Image.asset(
               AppImages.emptyState,
               height: 400,
@@ -34,31 +34,29 @@ class _FavoritePageState extends State<FavoritePage> {
             Text(
               "No Favorites Yet",
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w600,
               ),
             ),
 
             Padding(
               padding: const EdgeInsets.only(right: 20, left: 20, top: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Text(
                     "tap the ",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w400,
-                      fontSize: 18,
                     ),
                   ),
-                  Icon(Icons.favorite_rounded, color: Colors.red),
+                  Icon(Icons.favorite_rounded, color: Colors.red, size: 20),
                   Text(
                     " icon on any meal to save it here",
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w400,
-                      fontSize: 18,
                     ),
                   ),
                 ],

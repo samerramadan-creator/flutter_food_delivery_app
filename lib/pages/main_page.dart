@@ -32,17 +32,10 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepOrange,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
-        ),
-        elevation: 0,
-        centerTitle: true,
         title: Text(
           'foodak',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
             color: Colors.black87,
-            fontStyle: FontStyle.italic,
             fontWeight: FontWeight.w500,
           ),
         ),

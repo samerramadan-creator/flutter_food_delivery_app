@@ -21,7 +21,7 @@ class _CustomButtonNavigationBarState extends State<CustomButtonNavigationBar> {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.deepOrange,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(50),
         boxShadow: [
           BoxShadow(
@@ -34,13 +34,8 @@ class _CustomButtonNavigationBarState extends State<CustomButtonNavigationBar> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.deepOrange,
-          elevation: 0,
           currentIndex: widget.selectedIndex,
           onTap: widget.onItemTapped,
-          selectedItemColor: Colors.black87,
-          unselectedItemColor: Colors.white70,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_rounded),

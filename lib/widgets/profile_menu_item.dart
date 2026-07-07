@@ -18,17 +18,16 @@ class ProfileMenuItem extends StatelessWidget {
       title: Text(
         title,
         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-          fontStyle: FontStyle.italic,
           fontWeight: FontWeight.w700,
-          fontSize: 20,
         ),
       ),
       subtitle: subtitle != null
           ? Text(
               subtitle!,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+                fontStyle: FontStyle.italic,
+              ),
             )
           : null,
       leading: Icon(icon, color: Colors.black87),

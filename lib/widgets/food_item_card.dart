@@ -3,7 +3,7 @@ import 'package:food_delivary_app/models/food_item.dart';
 
 class FoodItemCard extends StatelessWidget {
   final FoodItem foodItem;
-  final ValueChanged <FoodItem> onFavoritePressed;
+  final ValueChanged<FoodItem> onFavoritePressed;
 
   const FoodItemCard({
     super.key,
@@ -14,8 +14,8 @@ class FoodItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
-      padding: const EdgeInsets.all(4.0),
+      margin: const EdgeInsets.all(6),
+      padding: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
@@ -32,6 +32,7 @@ class FoodItemCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Stack(
+            alignment: Alignment.topLeft,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(35),
@@ -43,23 +44,25 @@ class FoodItemCard extends StatelessWidget {
                   filterQuality: FilterQuality.high,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 110),
-                padding: EdgeInsets.all(12),
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    onFavoritePressed(foodItem);
-                  },
-                  icon: Icon(
-                    foodItem.isFavorite
-                        ? Icons.favorite_rounded
-                        : Icons.favorite_border_outlined,
-                    color: Colors.red,
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  height: 40,
+                  width: 40,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: Colors.grey.shade200,
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      onFavoritePressed(foodItem);
+                    },
+                    icon: Icon(
+                      foodItem.isFavorite
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_border_outlined,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
@@ -68,6 +71,7 @@ class FoodItemCard extends StatelessWidget {
           Text(
             foodItem.name,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontStyle: FontStyle.italic,
               color: Colors.black87,
               fontWeight: FontWeight.w500,
             ),

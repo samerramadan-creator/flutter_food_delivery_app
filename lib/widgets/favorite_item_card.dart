@@ -3,7 +3,7 @@ import 'package:food_delivary_app/models/food_item.dart';
 
 class FavoriteItemCard extends StatelessWidget {
   final FoodItem foodItem;
-  final ValueChanged <FoodItem> removeFavoriteItem;
+  final ValueChanged<FoodItem> removeFavoriteItem;
 
   const FavoriteItemCard({
     super.key,
@@ -13,8 +13,6 @@ class FavoriteItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(4.0),
@@ -45,25 +43,28 @@ class FavoriteItemCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 15),
-            Column(
-              children: [
-                Text(
-                  foodItem.name,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    foodItem.name,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontStyle: FontStyle.italic,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                Text(
-                  "\$ ${foodItem.price}",
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w500,
+                  Text(
+                    "\$${foodItem.price.toStringAsFixed(2)}",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            SizedBox(width: size.width * .015),
+            const SizedBox(width: 8),
             Container(
               height: 50,
               width: 50,
@@ -73,8 +74,8 @@ class FavoriteItemCard extends StatelessWidget {
 
               child: IconButton(
                 onPressed: () {
-                    foodItem.isFavorite = false;
-                    removeFavoriteItem(foodItem);
+                  foodItem.isFavorite = false;
+                  removeFavoriteItem(foodItem);
                 },
                 icon: Icon(
                   foodItem.isFavorite
