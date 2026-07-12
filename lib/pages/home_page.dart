@@ -14,7 +14,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
 
     return SingleChildScrollView(
       child: Column(
@@ -27,7 +30,7 @@ class _HomePageState extends State<HomePage> {
               child: Image.asset(
                 AppImages.offerBanner,
                 width: double.infinity,
-                height: size.height * 0.28,
+                height: isLandscape ? screenHeight * .5 : screenHeight * .25,
                 fit: BoxFit.contain,
                 filterQuality: FilterQuality.high,
               ),
@@ -37,10 +40,12 @@ class _HomePageState extends State<HomePage> {
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 10,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: (screenWidth < 600)
+                  ? 2
+                  : (screenWidth / 220).floor(),
+              mainAxisSpacing: screenHeight * .02,
+              crossAxisSpacing: screenWidth * .018,
             ),
             itemCount: foodItems.length,
             itemBuilder: (context, index) {

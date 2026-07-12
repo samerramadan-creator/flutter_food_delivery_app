@@ -8,7 +8,13 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView(children: [ProfileHeader(), ProfileMenuTile()]),
+      child: ListView(
+        children: [
+          const SizedBox(height: 20),
+          ProfileHeader(),
+          ProfileMenuTile(),
+        ],
+      ),
     );
   }
 }

@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage> {
 
       drawer: const Drawer(),
 
-      body: pages[selectedIndex],
+      body: SafeArea(child: pages[selectedIndex]),
 
       bottomNavigationBar: CustomButtonNavigationBar(
         selectedIndex: selectedIndex,

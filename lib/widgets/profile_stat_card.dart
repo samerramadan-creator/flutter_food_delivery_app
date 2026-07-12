@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 class ProfileStatCard extends StatelessWidget {
   final String title;
   final int count;
-  
+
   const ProfileStatCard({super.key, required this.title, required this.count});
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    // final textScale = MediaQuery.of(context).textScaler;
+
     return Container(
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(16.0),
-      height: 100,
-      width: 150,
+      height: isLandscape ? screenHeight * .24 : screenHeight * .11,
+      width: isLandscape ? screenWidth * .25 : screenWidth * .35,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),

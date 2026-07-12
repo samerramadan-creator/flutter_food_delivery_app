@@ -18,73 +18,83 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final List<FoodItem> favoriteItems = foodItems
+        .where((item) => item.isFavorite)
+        .toList();
+
     if (favoriteItems.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 30),
-            Image.asset(
-              AppImages.emptyState,
-              height: 400,
-              width: 400,
-              fit: BoxFit.cover,
-            ),
-
-            Text(
-              "No Favorites Yet",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontWeight: FontWeight.w600,
+      return SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 30),
+              Image.asset(
+                AppImages.emptyState,
+                height: isLandscape ? screenHeight * .75 : screenHeight * .5,
+                width: screenWidth,
+                fit: isLandscape ? BoxFit.contain : BoxFit.cover,
               ),
-            ),
 
-            Padding(
-              padding: const EdgeInsets.only(right: 20, left: 20, top: 8),
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Text(
-                    "tap the ",
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Icon(Icons.favorite_rounded, color: Colors.red, size: 20),
-                  Text(
-                    " icon on any meal to save it here",
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
+              Text(
+                "No Favorites Yet",
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-          ],
+
+              Padding(
+                padding: const EdgeInsets.only(right: 20, left: 20, top: 8),
+                child: Wrap(
+                  alignment: WrapAlignment.center,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    Text(
+                      "tap the ",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Icon(Icons.favorite_rounded, color: Colors.red, size: 20),
+                    Text(
+                      " icon on any meal to save it here",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: favoriteItems.length,
-              itemBuilder: (context, index) {
-                return FavoriteItemCard(
-                  foodItem: favoriteItems[index],
-                  removeFavoriteItem: (FoodItem foodItem) => setState(() {
-                    favoriteItems.remove(foodItem);
-                  }),
-                );
-              },
-            ),
-          ),
-        ],
+      padding: const EdgeInsets.all(12.0),
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: (screenWidth < 600) ? 2 : (screenWidth / 220).floor(),
+          mainAxisSpacing: screenHeight * .02,
+          crossAxisSpacing: screenWidth * .018,
+        ),
+        itemCount: favoriteItems.length,
+        itemBuilder: (context, index) {
+          return FavoriteItemCard(
+            foodItem: favoriteItems[index],
+            removeFavoriteItem: (FoodItem foodItem) => setState(() {
+              favoriteItems.remove(foodItem);
+            }),
+          );
+        },
       ),
     );
   }

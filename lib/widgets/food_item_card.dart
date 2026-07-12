@@ -28,62 +28,70 @@ class FoodItemCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.topLeft,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(35),
-                child: Image.asset(
-                  foodItem.imageUrl,
-                  width: 120,
-                  height: 120,
-                  fit: BoxFit.cover,
-                  filterQuality: FilterQuality.high,
-                ),
-              ),
-              Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.grey.shade200,
+      child: LayoutBuilder(
+        builder: (context, constraints) => Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(35),
+                  child: Image.asset(
+                    foodItem.imageUrl,
+                    height: constraints.maxHeight * .65,
+                    width: constraints.maxWidth * .65,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
                   ),
-                  child: IconButton(
-                    onPressed: () {
-                      onFavoritePressed(foodItem);
-                    },
-                    icon: Icon(
-                      foodItem.isFavorite
-                          ? Icons.favorite_rounded
-                          : Icons.favorite_border_outlined,
-                      color: Colors.red,
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    height: constraints.maxHeight * .22,
+                    width: constraints.maxWidth * .22,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.grey.shade200,
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        onFavoritePressed(foodItem);
+                      },
+                      icon: Icon(
+                        foodItem.isFavorite
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_border_outlined,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
+              ],
+            ),
+            SizedBox(height: constraints.maxHeight * .01),
+            Text(
+              foodItem.name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
               ),
-            ],
-          ),
-          Text(
-            foodItem.name,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontStyle: FontStyle.italic,
-              color: Colors.black87,
-              fontWeight: FontWeight.w500,
             ),
-          ),
-          Text(
-            '\$${foodItem.price.toStringAsFixed(2)}',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Colors.black87,
-              fontWeight: FontWeight.w500,
+            SizedBox(height: constraints.maxHeight * .01),
+            Text(
+              '\$${foodItem.price.toStringAsFixed(2)}',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

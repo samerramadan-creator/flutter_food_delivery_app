@@ -6,49 +6,49 @@ class ProfileMenuTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const Divider(indent: 10, endIndent: 10),
+        Divider(indent: 10, endIndent: 10),
         ProfileMenuItem(
           title: "edit profile",
           icon: Icons.edit_rounded,
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "location",
           icon: Icons.location_on_outlined,
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "payment methods",
           icon: Icons.credit_card_rounded,
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "my orders",
           icon: Icons.shopping_bag_rounded,
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "my vouchers",
           icon: Icons.card_giftcard_rounded, 
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "settings",
           icon: Icons.settings_outlined,
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "about",
            icon: Icons.info_outline_rounded,
         ),
-        const Divider(),
+        Divider(),
         ProfileMenuItem(
           title: "logout",
           icon: Icons.logout_rounded,
         ),
-        const Divider(indent: 10, endIndent: 10),
+        Divider(indent: 10, endIndent: 10),
       ],
     );
   }
