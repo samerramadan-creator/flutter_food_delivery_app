@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivary_app/pages/cart_page.dart';
 import 'package:food_delivary_app/pages/favorite_page.dart';
@@ -31,18 +33,32 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'foodak',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            color: Colors.black87,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
+      appBar: Platform.isIOS
+          ? CupertinoNavigationBar(
+              automaticallyImplyLeading: true,
+              transitionBetweenRoutes: true,
+              automaticBackgroundVisibility: true,
+              backgroundColor: CupertinoColors.systemOrange.withValues(alpha: .6),
+              middle: Text(
+                'foodak',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
+          : AppBar(
+              title: Text(
+                'foodak',
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
 
-      drawer: const Drawer(),
-
+      // drawer: const Drawer(),
       body: SafeArea(child: pages[selectedIndex]),
 
       bottomNavigationBar: CustomButtonNavigationBar(

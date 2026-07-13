@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivary_app/models/food_item.dart';
 
@@ -13,6 +15,17 @@ class FavoriteItemCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteIcon = Icon(
+      foodItem.isFavorite
+          ? Platform.isIOS
+            ? CupertinoIcons.heart_fill
+            : Icons.favorite_rounded
+          : Platform.isIOS
+            ? CupertinoIcons.heart
+            : Icons.favorite_border_outlined,
+      color: Colors.red,
+    );
+    
     return Container(
       margin: const EdgeInsets.all(6),
       padding: const EdgeInsets.all(10.0),
@@ -58,12 +71,7 @@ class FavoriteItemCard extends StatelessWidget {
                         foodItem.isFavorite = false;
                         removeFavoriteItem(foodItem);
                       },
-                      icon: Icon(
-                        foodItem.isFavorite
-                            ? Icons.favorite_rounded
-                            : Icons.favorite_border_outlined,
-                        color: Colors.red,
-                      ),
+                      icon: favoriteIcon,
                     ),
                   ),
                 ),

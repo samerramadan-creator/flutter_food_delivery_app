@@ -32,6 +32,7 @@ class ProfileStatCard extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             count.toString(),
