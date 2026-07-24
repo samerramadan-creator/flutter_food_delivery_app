@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivary_app/core/constants/app_images.dart';
 import 'package:food_delivary_app/data/dummy_food.dart';
 import 'package:food_delivary_app/models/food_item.dart';
-import 'package:food_delivary_app/widgets/favorite_item_card.dart';
+import 'package:food_delivary_app/pages/food_details_page.dart';
+import 'package:food_delivary_app/widgets/food_item_card.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({super.key});
@@ -12,19 +13,21 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  final List<FoodItem> favoriteItems = foodItems
-      .where((item) => item.isFavorite)
-      .toList();
+  void toggleFavorite(FoodItem foodItem) {
+    setState(() {
+      foodItem.isFavorite = !foodItem.isFavorite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final List<FoodItem> favoriteItems = foodItems
+        .where((item) => item.isFavorite)
+        .toList();
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    final List<FoodItem> favoriteItems = foodItems
-        .where((item) => item.isFavorite)
-        .toList();
 
     if (favoriteItems.isEmpty) {
       return SingleChildScrollView(
@@ -88,11 +91,19 @@ class _FavoritePageState extends State<FavoritePage> {
         ),
         itemCount: favoriteItems.length,
         itemBuilder: (context, index) {
-          return FavoriteItemCard(
-            foodItem: favoriteItems[index],
-            removeFavoriteItem: (FoodItem foodItem) => setState(() {
-              favoriteItems.remove(foodItem);
-            }),
+          return InkWell(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => FoodDetailsPage(
+                  foodItem: favoriteItems[index],
+                  toggleFavorite: toggleFavorite,
+                ),
+              ),
+            ),
+            child: FoodItemCard(
+              foodItem: favoriteItems[index],
+              toggleFavorite: toggleFavorite,
+            ),
           );
         },
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivary_app/core/constants/app_images.dart';
 import 'package:food_delivary_app/data/dummy_food.dart';
 import 'package:food_delivary_app/models/food_item.dart';
+import 'package:food_delivary_app/pages/food_details_page.dart';
 import 'package:food_delivary_app/widgets/food_item_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,6 +13,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void toggleFavorite(FoodItem foodItem) {
+    setState(() {
+      foodItem.isFavorite = !foodItem.isFavorite;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -49,13 +56,19 @@ class _HomePageState extends State<HomePage> {
             ),
             itemCount: foodItems.length,
             itemBuilder: (context, index) {
-              return FoodItemCard(
-                foodItem: foodItems[index],
-                onFavoritePressed: (FoodItem foodItem) {
-                  setState(() {
-                    foodItem.isFavorite = !foodItem.isFavorite;
-                  });
-                },
+              return InkWell(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => FoodDetailsPage(
+                      foodItem: foodItems[index],
+                      toggleFavorite: toggleFavorite,
+                    ),
+                  ),
+                ),
+                child: FoodItemCard(
+                  foodItem: foodItems[index],
+                  toggleFavorite: toggleFavorite,
+                ),
               );
             },
           ),

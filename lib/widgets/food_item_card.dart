@@ -1,31 +1,19 @@
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivary_app/models/food_item.dart';
+import 'package:food_delivary_app/widgets/custom_favorite_button.dart';
 
 class FoodItemCard extends StatelessWidget {
   final FoodItem foodItem;
-  final ValueChanged<FoodItem> onFavoritePressed;
+  final ValueChanged<FoodItem> toggleFavorite;
 
   const FoodItemCard({
     super.key,
     required this.foodItem,
-    required this.onFavoritePressed,
+    required this.toggleFavorite
   });
 
   @override
   Widget build(BuildContext context) {
-    final favoriteIcon = Icon(
-      foodItem.isFavorite
-          ? Platform.isIOS
-            ? CupertinoIcons.heart_fill
-            : Icons.favorite_rounded
-          : Platform.isIOS
-            ? CupertinoIcons.heart
-          : Icons.favorite_border_outlined,
-      color: Colors.red,
-    );
-
     return Container(
       margin: const EdgeInsets.all(6),
       padding: const EdgeInsets.all(10.0),
@@ -46,6 +34,7 @@ class FoodItemCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Stack(
+              alignment: Alignment(-.5, -1),
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(35),
@@ -57,22 +46,10 @@ class FoodItemCard extends StatelessWidget {
                     filterQuality: FilterQuality.high,
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    height: constraints.maxHeight * .22,
-                    width: constraints.maxWidth * .22,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.grey.shade200,
-                    ),
-                    child: IconButton(
-                      onPressed: () {
-                        onFavoritePressed(foodItem);
-                      },
-                      icon: favoriteIcon
-                    ),
-                  ),
+                CustomFavoriteButton(
+                  foodItem: foodItem,
+                  toggleFavorite : toggleFavorite,
+                  constraints: constraints,
                 ),
               ],
             ),
