@@ -17,6 +17,7 @@ List<FoodItem> foodItems = [
     calories: 650,
     rate: 4.7,
     isFavorite: false,
+    categoryId: 1,
   ),
   FoodItem(
     name: 'Chicken burger',
@@ -31,6 +32,7 @@ List<FoodItem> foodItems = [
     calories: 590,
     rate: 4.6,
     isFavorite: false,
+    categoryId: 1,
   ),
 
   // Pizzas
@@ -47,6 +49,7 @@ List<FoodItem> foodItems = [
     calories: 820,
     rate: 4.8,
     isFavorite: false,
+    categoryId: 2,
   ),
   FoodItem(
     name: 'Margherita pizza',
@@ -61,6 +64,7 @@ List<FoodItem> foodItems = [
     calories: 730,
     rate: 4.5,
     isFavorite: false,
+    categoryId: 2,
   ),
 
   // Chicken
@@ -77,6 +81,7 @@ List<FoodItem> foodItems = [
     calories: 710,
     rate: 4.7,
     isFavorite: false,
+    categoryId: 3,
   ),
   FoodItem(
     name: 'Fried chicken',
@@ -91,6 +96,7 @@ List<FoodItem> foodItems = [
     calories: 840,
     rate: 4.9,
     isFavorite: false,
+    categoryId: 3,
   ),
 
   // Hot Dog
@@ -107,6 +113,7 @@ List<FoodItem> foodItems = [
     calories: 420,
     rate: 4.4,
     isFavorite: false,
+    categoryId: 4,
   ),
 
   // Shawarma
@@ -123,6 +130,7 @@ List<FoodItem> foodItems = [
     calories: 610,
     rate: 4.8,
     isFavorite: false,
+    categoryId: 5,
   ),
 
   // Tacos
@@ -139,6 +147,7 @@ List<FoodItem> foodItems = [
     calories: 560,
     rate: 4.7,
     isFavorite: false,
+    categoryId: 6,
   ),
 
   // Sushi
@@ -155,6 +164,7 @@ List<FoodItem> foodItems = [
     calories: 430,
     rate: 4.9,
     isFavorite: false,
+    categoryId: 7,
   ),
 
   // Pasta
@@ -171,6 +181,7 @@ List<FoodItem> foodItems = [
     calories: 760,
     rate: 4.6,
     isFavorite: false,
+    categoryId: 8,
   ),
 
   // Lasagna
@@ -187,6 +198,7 @@ List<FoodItem> foodItems = [
     calories: 880,
     rate: 4.8,
     isFavorite: false,
+    categoryId: 9,
   ),
 
   // Steak
@@ -203,6 +215,7 @@ List<FoodItem> foodItems = [
     calories: 790,
     rate: 4.9,
     isFavorite: false,
+    categoryId: 10,
   ),
 
   // Salad
@@ -219,6 +232,7 @@ List<FoodItem> foodItems = [
     calories: 310,
     rate: 4.5,
     isFavorite: false,
+    categoryId: 11,
   ),
 
   // Dessert
@@ -235,5 +249,6 @@ List<FoodItem> foodItems = [
     calories: 390,
     rate: 4.4,
     isFavorite: false,
+    categoryId: 12,
   ),
 ];

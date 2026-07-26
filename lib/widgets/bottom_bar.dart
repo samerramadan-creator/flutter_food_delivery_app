@@ -32,6 +32,7 @@ class BottomBar extends StatelessWidget {
           child: Row(
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "    Total Price",

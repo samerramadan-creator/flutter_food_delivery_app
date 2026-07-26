@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivary_app/models/food_item.dart';
+import 'package:food_delivary_app/ui_models/food_details_args.dart';
 import 'package:food_delivary_app/widgets/bottom_bar.dart';
 import 'package:food_delivary_app/widgets/custom_photo.dart';
 import 'package:food_delivary_app/widgets/food_details_grid.dart';
 
 class FoodDetailsPage extends StatefulWidget {
-  final FoodItem foodItem;
-  final ValueChanged<FoodItem> toggleFavorite;
+  const FoodDetailsPage({super.key});
 
-  const FoodDetailsPage({
-    super.key,
-    required this.foodItem,
-    required this.toggleFavorite,
-  });
-
+  static const routeName = "/food-details";
   @override
   State<FoodDetailsPage> createState() => _FoodDetailsPageState();
 }
@@ -32,6 +27,11 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
+    final FoodDetailsArgs foodDetailsArgs =
+        ModalRoute.of(context)!.settings.arguments as FoodDetailsArgs;
+    final FoodItem foodItem = foodDetailsArgs.foodItem;
+    final ValueChanged<FoodItem> toggleFavorite =
+        foodDetailsArgs.toggleFavorite;
 
     return Scaffold(
       body: SafeArea(
@@ -40,10 +40,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomPhoto(
-                foodItem: widget.foodItem,
-                toggleFavorite: widget.toggleFavorite,
-              ),
+              CustomPhoto(foodItem: foodItem, toggleFavorite: toggleFavorite),
               SizedBox(height: screenHeight * .01),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,12 +49,12 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.foodItem.name,
+                        foodItem.name,
                         style: Theme.of(context).textTheme.headlineSmall!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        "by ${widget.foodItem.restaurant}",
+                        "by ${foodItem.restaurant}",
                         style: Theme.of(
                           context,
                         ).textTheme.labelLarge!.copyWith(color: Colors.black54),
@@ -119,7 +116,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 children: [
                   Icon(Icons.star_rate_rounded, color: Colors.orange.shade700),
                   Text(
-                    widget.foodItem.rate.toString(),
+                    foodItem.rate.toString(),
                     style: Theme.of(
                       context,
                     ).textTheme.labelLarge!.copyWith(color: Colors.black54),
@@ -135,22 +132,19 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                 ),
               ),
               Text(
-                widget.foodItem.description,
+                foodItem.description,
                 style: Theme.of(context).textTheme.labelLarge!.copyWith(
                   fontSize: 15,
                   color: Colors.black54,
                 ),
               ),
               SizedBox(height: screenHeight * .03),
-              FoodDetailsGrid(foodItem: widget.foodItem),
+              FoodDetailsGrid(foodItem: foodItem),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomBar(
-        foodItem: widget.foodItem,
-        count: quantity,
-      ),
+      bottomNavigationBar: BottomBar(foodItem: foodItem, count: quantity),
     );
   }
 }

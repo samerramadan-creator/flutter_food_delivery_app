@@ -2,6 +2,7 @@ class FoodItem {
   final String name;
   final double price;
   final String imageUrl;
+  final int categoryId;
   final String restaurant;
   final String description;
   final String spicyLevel;
@@ -23,5 +24,6 @@ class FoodItem {
     required this.cookingTime,
     required this.calories,
     required this.rate,
+    required this.categoryId,
   });
 }

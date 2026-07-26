@@ -3,6 +3,7 @@ import 'package:food_delivary_app/core/constants/app_images.dart';
 import 'package:food_delivary_app/data/dummy_food.dart';
 import 'package:food_delivary_app/models/food_item.dart';
 import 'package:food_delivary_app/pages/food_details_page.dart';
+import 'package:food_delivary_app/ui_models/food_details_args.dart';
 import 'package:food_delivary_app/widgets/food_item_card.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -92,12 +93,11 @@ class _FavoritePageState extends State<FavoritePage> {
         itemCount: favoriteItems.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => FoodDetailsPage(
-                  foodItem: favoriteItems[index],
-                  toggleFavorite: toggleFavorite,
-                ),
+            onTap: () => Navigator.of(context).pushNamed(
+              FoodDetailsPage.routeName,
+              arguments: FoodDetailsArgs(
+                foodItem: favoriteItems[index],
+                toggleFavorite: toggleFavorite,
               ),
             ),
             child: FoodItemCard(

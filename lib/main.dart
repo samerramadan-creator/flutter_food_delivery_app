@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_delivary_app/pages/cart_page.dart';
+import 'package:food_delivary_app/pages/favorite_page.dart';
+import 'package:food_delivary_app/pages/food_details_page.dart';
+import 'package:food_delivary_app/pages/home_page.dart';
 import 'package:food_delivary_app/pages/main_page.dart';
+import 'package:food_delivary_app/pages/profile_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +54,14 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const MainPage(),
+      routes: {
+        "/": (context) => const MainPage(),
+        "/home": (context) => const HomePage(),
+        "/favorite": (context) => const FavoritePage(),
+        "/cart": (context) => const CartPage(),
+        "/profile": (context) => const ProfilePage(),
+        FoodDetailsPage.routeName: (context) => const FoodDetailsPage(),
+      },
     );
   }
 }
